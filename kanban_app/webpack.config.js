@@ -22,7 +22,7 @@ const common = {
   // Note the .'s before extensions as it will fail to match without.'
   resolve: {
     extensions: ['', '.js', '.jsx']
-  }
+  },
   output: {
     path: PATHS.build,
     filename: 'bundle.js'
@@ -46,8 +46,7 @@ const common = {
         // Parse only app files! Without this is it will go through entire project
         // In addition to being slow, that will most likely result in an error.
         include: PATHS.app
-      }
-    }
+      }    
     ]
   }
 };
