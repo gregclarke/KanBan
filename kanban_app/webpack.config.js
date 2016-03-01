@@ -32,11 +32,14 @@ const common = {
   module: {
     loaders: [
       {
-        // Test expects a REgExp! Note the slashes!
+        // Test expects a RegExp! Note the slashes!
         test: /\.css$/,
         loaders: ['style', 'css'],
         // Include accepts either a path or an array of paths.
         include: PATHS.app
+      },
+      {
+        test: /\.png$/, loader: "url-loader?limit=100000"
       },
       // Set up jsx. This accepts js too thanks to RegExp
       {
@@ -82,6 +85,9 @@ if(TARGET === 'start' || !TARGET) {
       port: process.env.PORT
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': '"development"'
+      }),
       new webpack.HotModuleReplacementPlugin(),
       new NpmInstallPlugin({
         save: true // --save
@@ -91,5 +97,16 @@ if(TARGET === 'start' || !TARGET) {
 }
 
 if(TARGET === 'build') {
-  module.exports = merge(common, {});
+  module.exports = merge(common, {
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NODE_ENV': '"production"'
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: false
+        }
+      })
+    ]
+  });
 }

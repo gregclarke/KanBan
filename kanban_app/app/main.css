@@ -1,6 +1,79 @@
 body {
-  background: cornsilk;
+  background-image: url("./cream_dust.png");
   font-family: sans-serif;
+}
+
+.lane {
+  display: inline-block;
+
+  margin: 1em;
+
+  background-color: #efefef;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+
+  min-width: 10em;
+  vertical-align: top;
+}
+
+.lane-header {
+  overflow: auto;
+  position: relative;
+  padding: 1em;
+
+  color: #efefef;
+  background-color: #333;
+
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+.lane-name {
+  float: left;
+}
+
+.lane-add-note {
+  float: left;
+  margin-right: 0.5em;
+}
+
+.lane-delete {
+  position: absolute;
+  right: 0.5em;
+  top: 0.1em;
+  visibility: hidden;
+}
+
+.lane-header:hover .lane-delete {
+  visibility: visible;
+}
+
+.add-lane, .lane-add-note button {
+  cursor: pointer;
+
+  background-color: #fdfdfd;
+  border: 1px solid #ccc;
+}
+
+.hover-text {
+  margin-left: 0.5em;
+  width: 0;
+  display: none;
+}
+
+.add-lane:hover .hover-text {
+  display: inline;
+  width: auto;
+}
+
+.lane-delete button {
+  padding: 0;
+
+  cursor: pointer;
+
+  color: white;
+  background-color: rgba(0,0,0,0);
+  border: 0;
 }
 
 .add-note {
@@ -18,7 +91,7 @@ body {
 .note {
   margin-bottom: 0.5em;
   padding: 0.5em;
-
+  position: relative;
   background-color: #fdfdfd;
   box-shadow: 0 0 0.3em 0.03em rgba(0,0,0,0.3);
 }
@@ -29,13 +102,16 @@ body {
   transition: 0.6s;
 }
 
-.note .task {
+.note .value {
   /* force to use inline-block so that it gets minimum height */
   display: inline-block;
 }
 
-.note .delete-note {
-  float: right;
+.note .delete {
+  right: 0.2em;
+  top: 0;
+  position: absolute;
+  line-height: 1;
   padding: 0;
   background-color: #fdfdfd;
   border: none;
@@ -45,6 +121,11 @@ body {
   visibility: hidden;
 }
 
-.note:hover .delete-note {
+.note:hover .delete {
   visibility: visible;
+}
+
+input {
+  max-width: 90%;
+  padding:0.3em;
 }
